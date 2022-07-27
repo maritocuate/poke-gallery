@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.scss';
 
+import { Header } from './components/Header';
+import { ListItems } from './components/ListItems';
+
 function App() {
   return (
-    <>
-      <header className='container'>
-        <h1 className='display-4'>Poke Gallery</h1>
-      </header>
-      <main className='container'>
+    <div className='container'>
+      <Header />
+      <main>
+        <ListItems />
         {/* <div className="card" style={{width: '500px'}}>
           <img src='https://picsum.photos/500' alt="Card" />
           <div className="card-body">
@@ -15,7 +17,7 @@ function App() {
           </div>
         </div> */}
       </main>
-    </>
+    </div>
   );
 }
 

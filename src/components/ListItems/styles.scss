@@ -1,0 +1,9 @@
+@import '../../index.scss';
+
+.items {
+    color: white;
+
+    &__list {
+        list-style: none;
+    }
+}
