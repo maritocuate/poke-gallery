@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header className='container'>
+        <h1 className='display-4'>Poke Gallery</h1>
       </header>
-    </div>
+      <main className='container'>
+        {/* <div className="card" style={{width: '500px'}}>
+          <img src='https://picsum.photos/500' alt="Card" />
+          <div className="card-body">
+            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div> */}
+      </main>
+    </>
   );
 }
 

@@ -1,3 +1,6 @@
+$gradient-left: #61045F;
+$gradient-right: #AA076B;
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +8,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: $gradient-right;
+  background: -webkit-linear-gradient(to right, $gradient-left, $gradient-right);
+  background: linear-gradient(to right, $gradient-left, $gradient-right);
+  color: white;
 }
 
 code {
