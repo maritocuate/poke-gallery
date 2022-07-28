@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './styles.scss'
 
+import { Item } from './Item'
+
 export const ListItems = () => {
   const [list, setList] = useState<any>([])
   const [urlBack, setUrlBack] = useState<string>('')
   const [urlForward, setUrlForward] = useState<string>('')
   
   useEffect(() => {
-    if(urlBack==='') callApiList('https://pokeapi.co/api/v2/pokemon?limit=5&offset=0')
+    if(urlBack==='') callApiList('https://pokeapi.co/api/v2/pokemon?limit=8&offset=0')
   }, [urlBack])
 
   const callApiList = (urlApi:string) => {
@@ -27,7 +29,7 @@ export const ListItems = () => {
       <div className='items'>
         <ul className='items__list'>
           {
-            list.map((item:any) => console.log(item.url))
+            list.map(({name, url}:any) => <Item key={name} name={name} url={url} />)
           }
         </ul>
       </div>

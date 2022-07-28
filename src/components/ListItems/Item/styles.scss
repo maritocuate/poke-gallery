@@ -1,0 +1,15 @@
+@import '../../../index.scss';
+
+.item {
+    width: 17vw;
+    margin-bottom: 20px;
+    
+    &__image {
+        object-fit: cover;
+        height: 230px;
+        border: 7px solid rgba(255, 255, 255, .3);
+    }
+    &__description {
+        font-size: 11px;
+    }
+}
