@@ -18,9 +18,15 @@ export const MyPokes = ({show, handleClose}:{show:any, handleClose:any}) => {
         <Modal.Body>
           <> 
             {
-              myPokes.map((item:string, i:number) => (
-                <PokemonItem key={i} name={item} />
-              ))
+              (!myPokes.length)
+              ? (
+                <div className='p-3 mb-2 bg-danger text-white'>You dont have any pokemon in your team yet.</div>
+              )
+              : (
+                myPokes.map((item:string, i:number) => (
+                  <PokemonItem key={i} name={item} />
+                ))
+              )
             }
           </>
         </Modal.Body>

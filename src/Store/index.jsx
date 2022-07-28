@@ -8,10 +8,16 @@ export const StoreProvider = ({children}) => {
 
      const updateMyPokes = poke => setMyPokes([...myPokes, poke])
 
+     const deletePoke = poke => {
+          const filtered = myPokes.filter(item => item!==poke)
+          setMyPokes(filtered)
+     }
+
      return(
           <Store.Provider value={{
                myPokes,
-               updateMyPokes
+               updateMyPokes,
+               deletePoke
                }}>
                { children }
           </Store.Provider>
