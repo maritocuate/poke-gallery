@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './styles.scss'
 
 import { Item } from './Item'
+import { Controls } from './Controls'
 
 export const ListItems = () => {
   const [list, setList] = useState<any>([])
@@ -32,6 +33,7 @@ export const ListItems = () => {
             list.map(({name, url}:any) => <Item key={name} name={name} url={url} />)
           }
         </ul>
+        <Controls back={() => callApiList(urlBack)} forward={() => callApiList(urlForward)} />
       </div>
     </>
   )

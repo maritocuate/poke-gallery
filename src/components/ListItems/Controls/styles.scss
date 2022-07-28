@@ -1,0 +1,16 @@
+@import '../../../index.scss';
+
+.controls {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+    font-weight: bold;
+
+    &__button {
+        margin: 0 20px;
+        cursor: pointer;
+        &:hover {
+            transform: scale(1.5);
+        }
+    }
+}

@@ -6,7 +6,7 @@ import { ListItems } from './components/ListItems';
 
 function App() {
   return (
-    <div className='container'>
+    <div className='container app'>
       <Header />
       <main>
         <ListItems />
