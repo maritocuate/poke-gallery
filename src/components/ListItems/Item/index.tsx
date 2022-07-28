@@ -7,7 +7,7 @@ export const Item = ({ name, url }:{ name:string, url:string }) => {
   const [imageUrl, setImageUrl] = useState<string>('')
   const [weight, setWeight] = useState<string>('')
 
-  const { updateMyPokes } = useContext(Store)
+  const { myPokes, updateMyPokes } = useContext(Store)
 
   useEffect(() => {
     if(imageUrl==='') callApiList(url)
@@ -24,8 +24,14 @@ export const Item = ({ name, url }:{ name:string, url:string }) => {
       })
   }
 
+  const savePoke = () => {
+    if( !myPokes.filter((item:string) => item===name).length ) updateMyPokes(name)
+  }
+
+  const checkIfExist = () => ( myPokes.filter((item:string) => item===name).length ) ? true : false
+
   return (
-    <li className='item'>
+    <li className={`item ${checkIfExist() ? 'disabled' : ''}`}>
       <div className="card bg-dark item__card">
         <img className='card-img-top item__image' src={imageUrl} alt={name} />
         <div className="card-body">
@@ -33,7 +39,7 @@ export const Item = ({ name, url }:{ name:string, url:string }) => {
           <p className="card-text item__description">Weight: {weight}</p>
         </div>
       </div>
-      <span className='item__hover' onClick={() => updateMyPokes(name)}>+</span>
+      <span className='item__hover' onClick={() => !checkIfExist() ? updateMyPokes(name) : null}>+</span>
     </li>
   )
 }

@@ -22,7 +22,7 @@
     &__hover {
         display: none;
     }
-    &:hover {
+    &:not(.disabled):hover {
         cursor: pointer;
         .item__card {
             opacity: .5;
