@@ -5,6 +5,12 @@
     max-height: 310px;
     margin-bottom: 20px;
 
+    &.disabled &__card {
+        background-color: green!important;
+    }
+    &__card {
+        transition: all ease .1s;
+    }
     &__hover {
         position: relative;
         top: -115%;

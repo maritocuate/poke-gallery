@@ -24,10 +24,6 @@ export const Item = ({ name, url }:{ name:string, url:string }) => {
       })
   }
 
-  const savePoke = () => {
-    if( !myPokes.filter((item:string) => item===name).length ) updateMyPokes(name)
-  }
-
   const checkIfExist = () => ( myPokes.filter((item:string) => item===name).length ) ? true : false
 
   return (
