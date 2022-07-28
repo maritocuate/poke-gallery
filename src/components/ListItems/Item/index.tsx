@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './styles.scss'
+
+import { Store } from '../../../Store'
 
 export const Item = ({ name, url }:{ name:string, url:string }) => {
   const [imageUrl, setImageUrl] = useState<string>('')
   const [weight, setWeight] = useState<string>('')
+
+  const { updateMyPokes } = useContext(Store)
 
   useEffect(() => {
     if(imageUrl==='') callApiList(url)
@@ -15,7 +19,6 @@ export const Item = ({ name, url }:{ name:string, url:string }) => {
     await fetch(urlApi)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
         setImageUrl(data.sprites.other.dream_world.front_default)
         setWeight(data.weight)
       })
@@ -24,12 +27,13 @@ export const Item = ({ name, url }:{ name:string, url:string }) => {
   return (
     <li className='item'>
       <div className="card bg-dark item__card">
-          <img className='card-img-top item__image' src={imageUrl} alt={name} />
-          <div className="card-body">
-            <p className="card-title">{name.toUpperCase()}</p>
-            <p className="card-text item__description">Weight: {weight}</p>
-          </div>
+        <img className='card-img-top item__image' src={imageUrl} alt={name} />
+        <div className="card-body">
+          <p className="card-title">{name.toUpperCase()}</p>
+          <p className="card-text item__description">Weight: {weight}</p>
         </div>
+      </div>
+      <span className='item__hover' onClick={() => updateMyPokes(name)}>+</span>
     </li>
   )
 }

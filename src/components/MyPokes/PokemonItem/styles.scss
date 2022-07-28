@@ -1,0 +1,23 @@
+@import '../../../index.scss';
+
+.pokemon-item {
+    display: flex;
+    justify-content: flex-start;
+    background-color: white;
+    text-transform: uppercase;
+    color: $font-color-secondary;
+    margin: 10px;
+    border-radius: 5px;
+    padding: 5px 20px;
+    font-weight: bold;
+    cursor: pointer;
+
+    &__delete {
+        margin: -1px 12px;
+        color: white;
+    }
+    &:hover {
+        color: white;
+        background-color: $gradient-right;
+    }
+}

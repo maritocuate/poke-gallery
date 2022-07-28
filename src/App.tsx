@@ -5,6 +5,7 @@ import { Header } from './components/Header'
 import { ListItems } from './components/ListItems'
 import { MyPokes } from './components/MyPokes'
 import { Navbar } from './components/Navbar'
+import { StoreProvider } from './Store';
 
 function App() {
   const [show, setShow] = useState<boolean>(false)
@@ -15,11 +16,13 @@ function App() {
   return (
     <div className='container app'>
       <Header />
-      <Navbar handleShow={handleShow} />
-      <MyPokes show={show} handleClose={handleClose} />
-      <main>
-        <ListItems />
-      </main>
+      <StoreProvider>
+        <Navbar handleShow={handleShow} />
+        <MyPokes show={show} handleClose={handleClose} />
+        <main>
+          <ListItems />
+        </main>
+      </StoreProvider>
     </div>
   );
 }

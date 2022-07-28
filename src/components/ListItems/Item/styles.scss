@@ -2,8 +2,15 @@
 
 .item {
     width: 220px;
+    max-height: 310px;
     margin-bottom: 20px;
 
+    &__hover {
+        position: relative;
+        top: -115%;
+        width: 100%;
+        font-size: 190px;
+    }
     &__image {
         object-fit: cover;
         height: 230px;
@@ -11,5 +18,17 @@
     }
     &__description {
         font-size: 11px;
+    }
+    &__hover {
+        display: none;
+    }
+    &:hover {
+        cursor: pointer;
+        .item__card {
+            opacity: .5;
+        }
+        .item__hover {
+            display: block;
+        }
     }
 }
