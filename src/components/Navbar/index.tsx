@@ -2,11 +2,10 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import './styles.scss'
 
-export const Navbar = ({handleShow}:{handleShow:any}) => {
-
+export const Navbar = ({ handleShow }:{handleShow:any}) => {
   return (
     <nav className='nav-bar'>
-      <Button 
+      <Button
         variant="primary"
         className='btn btn-warning btn-sm'
         onClick={handleShow}

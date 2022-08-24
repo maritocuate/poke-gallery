@@ -10,11 +10,11 @@ export const Item = ({ name, url }:{ name:string, url:string }) => {
   const { myPokes, updateMyPokes } = useContext(Store)
 
   useEffect(() => {
-    if(imageUrl==='') callApiList(url)
+    if (imageUrl === '') callApiList(url)
   }, [imageUrl])
 
   const callApiList = async (urlApi:string) => {
-    if(!urlApi) return
+    if (!urlApi) return
 
     await fetch(urlApi)
       .then(response => response.json())
@@ -24,7 +24,7 @@ export const Item = ({ name, url }:{ name:string, url:string }) => {
       })
   }
 
-  const checkIfExist = () => ( myPokes.filter((item:string) => item===name).length ) ? true : false
+  const checkIfExist = () => !!(myPokes.filter((item:string) => item === name).length)
 
   return (
     <li className={`item ${checkIfExist() ? 'disabled' : ''}`}>
