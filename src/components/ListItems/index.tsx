@@ -1,39 +1,75 @@
 import React, { useEffect, useState } from 'react'
 import './styles.scss'
 
-import { Item } from './Item'
-import { Controls } from './Controls'
+import ReactPaginate from 'react-paginate'
+import { Items } from './Items'
 
 export const ListItems = () => {
   const [list, setList] = useState<any>([])
-  const [urlBack, setUrlBack] = useState<string>('')
-  const [urlForward, setUrlForward] = useState<string>('')
+
+  const [currentItems, setCurrentItems] = useState(null)
+  const [pageCount, setPageCount] = useState<number>(0)
+  const [itemOffset, setItemOffset] = useState<number>(0)
+  const itemsPerPage = 8
 
   useEffect(() => {
-    if (urlBack === '') callApiList('https://pokeapi.co/api/v2/pokemon?limit=8&offset=0')
-  }, [urlBack])
+    const endOffset = itemOffset + itemsPerPage
 
-  const callApiList = (urlApi:string) => {
-    if (!urlApi) return
+    const callApiList = async () => {
+      fetch('https://pokeapi.co/api/v2/pokemon/?limit=600')
+        .then(response => response.json())
+        .then(pokes => {
+          setList(pokes.results)
 
-    fetch(urlApi)
-      .then(response => response.json())
-      .then(pokes => {
-        setList(pokes.results)
-        setUrlBack(pokes.previous)
-        setUrlForward(pokes.next)
-      })
+          setCurrentItems(list.slice(itemOffset, endOffset))
+          setPageCount(Math.ceil(list.length / itemsPerPage))
+        })
+    }
+
+    callApiList()
+  }, [currentItems, itemOffset, itemsPerPage])
+
+  const handlePageClick = (event: { selected: number }) => {
+    const newOffset = (event.selected * itemsPerPage) % list.length
+    setItemOffset(newOffset)
   }
 
   return (
     <>
       <div className='items'>
-        <ul className='items__list'>
-          {
-            list.map(({ name, url }:any) => <Item key={name} name={name} url={url} />)
-          }
-        </ul>
-        <Controls back={() => callApiList(urlBack)} forward={() => callApiList(urlForward)} />
+        {
+          currentItems
+            ? (
+            <>
+            <ul className='items__list'>
+              <Items currentItems={ currentItems } />
+            </ul>
+            <nav className='items__nav'>
+              <ReactPaginate
+                marginPagesDisplayed={1}
+                breakLabel="..."
+                nextLabel="next >"
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel="< previous"
+
+                breakClassName={'page-item'}
+                breakLinkClassName={'page-link bg-dark text-warning'}
+                containerClassName={'pagination'}
+                pageClassName={'page-item'}
+                pageLinkClassName={'page-link bg-dark text-warning'}
+                previousClassName={'page-item'}
+                previousLinkClassName={'page-link bg-dark text-warning'}
+                nextClassName={'page-item'}
+                nextLinkClassName={'page-link bg-dark text-warning'}
+                activeClassName={'active'}
+              />
+            </nav>
+            </>
+              )
+            : null
+        }
       </div>
     </>
   )

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './styles.scss'
 
-import { Store } from '../../../Store'
+import { Store } from '../../../../Store'
 
 export const Item = ({ name, url }:{ name:string, url:string }) => {
   const [imageUrl, setImageUrl] = useState<string>('')
