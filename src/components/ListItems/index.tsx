@@ -20,7 +20,6 @@ export const ListItems = ({ apiData }:{apiData:any}) => {
       const regexp = new RegExp(searchBy, 'i')
       const filteredItems = apiData.filter((x:any) => regexp.test(x.name))
       setList(filteredItems)
-      console.log(filteredItems.length)
       if (!filteredItems.length) {
         setCurrentItems(null)
         return
@@ -45,7 +44,6 @@ export const ListItems = ({ apiData }:{apiData:any}) => {
           currentItems
             ? (
             <>
-            {console.log(currentItems)}
             <ul className='items__list'>
               <Items currentItems={ currentItems } />
             </ul>
