@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './App.scss'
 
 import { Header } from './components/Header'
@@ -9,6 +9,16 @@ import { StoreProvider } from './Store'
 
 function App () {
   const [show, setShow] = useState<boolean>(false)
+  const [apiData, setApiData] = useState([])
+
+  useEffect(() => {
+    const callApiList = async () => {
+      fetch('https://pokeapi.co/api/v2/pokemon/?limit=600')
+        .then(response => response.json())
+        .then(pokes => setApiData(pokes.results))
+    }
+    callApiList()
+  }, [])
 
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
@@ -20,7 +30,7 @@ function App () {
         <Navbar handleShow={handleShow} />
         <MyPokes show={show} handleClose={handleClose} />
         <main>
-          <ListItems />
+          <ListItems apiData={apiData} />
         </main>
       </StoreProvider>
     </div>

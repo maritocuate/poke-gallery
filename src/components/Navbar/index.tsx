@@ -1,15 +1,17 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, InputGroup } from 'react-bootstrap'
+import { SearchBar } from './SearchBar'
 import './styles.scss'
 
 export const Navbar = ({ handleShow }:{handleShow:any}) => {
   return (
-    <nav className='nav-bar'>
+    <InputGroup className='nav-bar mx-4'>
       <Button
         variant="primary"
         className='btn btn-warning btn-sm'
         onClick={handleShow}
       >My pokemon team</Button>
-    </nav>
+      <SearchBar />
+    </InputGroup>
   )
 }

@@ -4,8 +4,8 @@ import './styles.scss'
 import ReactPaginate from 'react-paginate'
 import { Items } from './Items'
 
-export const ListItems = () => {
-  const [list, setList] = useState<any>([])
+export const ListItems = ({ apiData }:{apiData:any}) => {
+  // const [list, setList] = useState<any>([])
 
   const [currentItems, setCurrentItems] = useState(null)
   const [pageCount, setPageCount] = useState<number>(0)
@@ -14,23 +14,12 @@ export const ListItems = () => {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage
-
-    const callApiList = async () => {
-      fetch('https://pokeapi.co/api/v2/pokemon/?limit=600')
-        .then(response => response.json())
-        .then(pokes => {
-          setList(pokes.results)
-
-          setCurrentItems(list.slice(itemOffset, endOffset))
-          setPageCount(Math.ceil(list.length / itemsPerPage))
-        })
-    }
-
-    callApiList()
-  }, [currentItems, itemOffset, itemsPerPage])
+    setCurrentItems(apiData.slice(itemOffset, endOffset))
+    setPageCount(Math.ceil(apiData.length / itemsPerPage))
+  }, [apiData, itemOffset, itemsPerPage])
 
   const handlePageClick = (event: { selected: number }) => {
-    const newOffset = (event.selected * itemsPerPage) % list.length
+    const newOffset = (event.selected * itemsPerPage) % apiData.length
     setItemOffset(newOffset)
   }
 

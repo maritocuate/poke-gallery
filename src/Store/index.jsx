@@ -4,6 +4,7 @@ export const Store = createContext()
 
 export const StoreProvider = ({ children }) => {
   const [myPokes, setMyPokes] = useState([])
+  const [searchBy, setSearchBy] = useState('')
 
   const updateMyPokes = poke => setMyPokes([...myPokes, poke])
 
@@ -12,10 +13,14 @@ export const StoreProvider = ({ children }) => {
     setMyPokes(filtered)
   }
 
+  const setSearch = name => setSearchBy(name)
+
   return (
           <Store.Provider value={{
             myPokes,
+            searchBy,
             updateMyPokes,
+            setSearch,
             deletePoke
           }}>
                { children }
