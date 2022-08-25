@@ -1,6 +1,6 @@
 # Poke Gallery App
 
-Pokemon SPA to see and catch the ones you want. <br/>
+Pokemon SPA to see, search and catch the ones you want. <br/>
 
 - Developed by Mario Quiroga.
 
@@ -22,5 +22,5 @@ Pokemon SPA to see and catch the ones you want. <br/>
 ### Build for production
 - `npm build` -> Will output a build folder
 
-### Test
-- `npm test` -> Launches the test runner in the interactive watch mode.
+### Linting
+- `npm lint` -> Will lint all code under `src` folder. Uses **JavaScript Standard Style**
