@@ -5,7 +5,7 @@ Pokemon SPA to see, search and catch the ones you want. <br/>
 - Developed by Mario Quiroga.
 
 ### Deploy
-- `https://earnest-haupia-3e3e11.netlify.app/`
+- **https://earnest-haupia-3e3e11.netlify.app**
 
 ### Rest API
 - **PokeAPI 2.0 -https://pokeapi.co-**

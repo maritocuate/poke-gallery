@@ -18,7 +18,7 @@ function App () {
         .then(pokes => setApiData(pokes.results))
     }
     callApiList()
-  }, [])
+  }, [apiData])
 
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
