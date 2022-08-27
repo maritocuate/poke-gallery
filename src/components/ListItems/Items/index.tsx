@@ -1,11 +1,20 @@
 import React from 'react'
 import { Item } from './Item'
 
-export const Items = ({ currentItems }:{ currentItems:[] }) => {
+interface IPoke {
+  name: string;
+  url: string;
+}
+
+interface IProps {
+  currentItems: IPoke[];
+}
+
+export const Items = (props:IProps) => {
   return (
         <>
         {
-            currentItems.map(({ name, url }:any) => <Item key={name} name={name} url={url} />)
+            props.currentItems.map(({ name, url }:any) => <Item key={name} name={name} url={url} />)
         }
         </>
   )

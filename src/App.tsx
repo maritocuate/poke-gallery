@@ -30,7 +30,13 @@ function App () {
         <Navbar handleShow={handleShow} />
         <MyPokes show={show} handleClose={handleClose} />
         <main>
-          <ListItems apiData={apiData} />
+          {
+            apiData.length
+              ? (
+              <ListItems apiData={apiData} />
+                )
+              : null
+          }
         </main>
       </StoreProvider>
     </div>

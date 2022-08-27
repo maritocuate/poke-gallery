@@ -5,15 +5,20 @@ import ReactPaginate from 'react-paginate'
 import { Items } from './Items'
 import { Store } from '../../Store'
 
-export const ListItems = ({ apiData }:{apiData:any}) => {
-  const [list, setList] = useState<any>([])
+interface IPoke {
+  name: string;
+  url: string;
+}
 
-  const [currentItems, setCurrentItems] = useState(null)
+export const ListItems = ({ apiData }:{apiData:any}) => {
+  const [list, setList] = useState<IPoke[]>([])
+
+  const [currentItems, setCurrentItems] = useState<IPoke[]>([])
   const [pageCount, setPageCount] = useState<number>(0)
   const [itemOffset, setItemOffset] = useState<number>(0)
   const itemsPerPage = 8
 
-  const { searchBy } = useContext(Store)
+  const { searchBy, sort } = useContext(Store)
 
   useEffect(() => {
     if (searchBy !== '') {
@@ -21,16 +26,18 @@ export const ListItems = ({ apiData }:{apiData:any}) => {
       const filteredItems = apiData.filter((x:any) => regexp.test(x.name))
       setList(filteredItems)
       if (!filteredItems.length) {
-        setCurrentItems(null)
-        return
+        setCurrentItems([])
       }
+    } else if (sort) {
+      const sortedItems = apiData.sort((a:any, b:any) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+      setList(sortedItems)
     } else {
       setList(apiData)
     }
     const endOffset = itemOffset + itemsPerPage
     setCurrentItems(list.slice(itemOffset, endOffset))
     setPageCount(Math.ceil(list.length / itemsPerPage))
-  }, [apiData, itemOffset, itemsPerPage, searchBy])
+  }, [list, itemOffset, itemsPerPage, searchBy, sort])
 
   const handlePageClick = (event: { selected: number }) => {
     const newOffset = (event.selected * itemsPerPage) % list.length
