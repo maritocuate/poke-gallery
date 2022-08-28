@@ -4,6 +4,7 @@ import './styles.scss'
 import { Store } from '../../../../Store'
 
 export const Item = ({ name, url }:{ name:string, url:string }) => {
+  const [load, setLoad] = useState<boolean>(false)
   const [imageUrl, setImageUrl] = useState<string>('')
   const [weight, setWeight] = useState<string>('')
 
@@ -29,7 +30,12 @@ export const Item = ({ name, url }:{ name:string, url:string }) => {
   return (
     <li className={`item ${checkIfExist() ? 'disabled' : ''}`}>
       <div className="card bg-dark item__card">
-        <img className='card-img-top item__image' src={imageUrl} alt={name} />
+        <img
+          className={`card-img-top item__image ${load ? 'loaded' : null}`}
+          src={imageUrl}
+          alt={name}
+          onLoad={() => setLoad(true)}
+        />
         <div className="card-body">
           <p className="card-title">{name.toUpperCase()}</p>
           <p className="card-text item__description">Weight: {weight}</p>

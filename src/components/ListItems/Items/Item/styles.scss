@@ -21,6 +21,11 @@
         object-fit: cover;
         height: 230px;
         border: 7px solid rgba(255, 255, 255, .3);
+        opacity: 0;
+        transition: opacity 0.2s ease-in;
+        &.loaded {
+            opacity: 1;
+        }
     }
     &__description {
         font-size: 11px;
