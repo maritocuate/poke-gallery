@@ -1,4 +1,19 @@
-@import '../../../../index.scss';
+@import '../../../index.scss';
+
+.items {
+    color: white;
+
+    &__list {
+        display: flex;
+        list-style: none;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    &__nav {
+        display: flex;
+        justify-content: center;
+    }
+}
 
 .item {
     width: 220px;

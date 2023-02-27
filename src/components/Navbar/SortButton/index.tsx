@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Button } from 'react-bootstrap'
+import { Dropdown } from 'react-bootstrap'
 
 import { Store } from '../../../Store'
 
@@ -7,10 +7,15 @@ export const SortButton = () => {
   const { changeSortDirection } = useContext(Store)
 
   return (
-    <Button
-        variant="primary"
-        className='btn btn-warning btn-sm'
-        onClick={ changeSortDirection }
-      >Sort A-Z</Button>
+    <Dropdown>
+      <Dropdown.Toggle variant='warning'>
+        Sort
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={ () => changeSortDirection('a-z') }>A-Z</Dropdown.Item>
+        <Dropdown.Item onClick={ () => changeSortDirection('z-a') }>Z-A</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   )
 }

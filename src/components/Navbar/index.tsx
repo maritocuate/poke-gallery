@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaHome } from 'react-icons/fa'
 import { Button, InputGroup } from 'react-bootstrap'
 import { SearchBar } from './SearchBar'
 import { SortButton } from './SortButton'
@@ -11,7 +12,7 @@ export const Navbar = ({ handleShow }:{handleShow:any}) => {
         variant="primary"
         className='btn btn-warning btn-sm'
         onClick={handleShow}
-      >My pokemon team</Button>
+      >My Team <FaHome /></Button>
       <SearchBar />
       <SortButton />
     </InputGroup>

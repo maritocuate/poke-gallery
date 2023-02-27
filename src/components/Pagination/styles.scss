@@ -1,0 +1,17 @@
+@import '../../index.scss';
+
+.pagination {
+    display: flex;
+    align-items: center;
+    
+    &__counter {
+        background-color: $gradient-left;
+        padding: 3px 20px;
+        border-radius: 5px;
+        margin: 0 10px;
+    }
+    &__btn {
+        cursor: pointer;
+        color: $font-color-primary;
+    }
+}

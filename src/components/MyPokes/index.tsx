@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { FaHome } from 'react-icons/fa'
 import Modal from 'react-bootstrap/Modal'
 import './styles.scss'
 
@@ -12,7 +13,7 @@ export const MyPokes = ({ show, handleClose }:{show:any, handleClose:any}) => {
     <>
       <Modal className='pokes' show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>My Pokemon Team</Modal.Title>
+          <Modal.Title><FaHome /> My Pokemon Team</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <>
