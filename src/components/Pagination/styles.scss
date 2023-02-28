@@ -3,8 +3,9 @@
 .pagination {
     display: flex;
     align-items: center;
-    
+
     &__counter {
+        color: white;
         background-color: $gradient-left;
         padding: 3px 20px;
         border-radius: 5px;

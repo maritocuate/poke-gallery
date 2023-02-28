@@ -1,20 +1,18 @@
 import React from 'react'
 import { FaHome } from 'react-icons/fa'
-import { Button, InputGroup } from 'react-bootstrap'
-import { SearchBar } from './SearchBar'
+import { Button, ButtonGroup } from 'react-bootstrap'
 import { SortButton } from './SortButton'
 import './styles.scss'
 
 export const Navbar = ({ handleShow }:{handleShow:any}) => {
   return (
-    <InputGroup className='nav-bar w-75'>
+    <ButtonGroup className='nav-bar'>
       <Button
         variant="primary"
         className='btn btn-warning btn-sm'
         onClick={handleShow}
-      >My Team <FaHome /></Button>
-      <SearchBar />
+      ><FaHome /> My Team</Button>
       <SortButton />
-    </InputGroup>
+    </ButtonGroup>
   )
 }

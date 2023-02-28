@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './App.scss'
 
-import { getPokes, getPokesData } from './api/axios'
+import { getPokes, getPokesData, searchPokemon } from './api/fetch'
 import { Header } from './components/Header'
 import { ListItems } from './components/ListItems'
 import { MyPokes } from './components/MyPokes'
 import { Navbar } from './components/Navbar'
+import { SearchBar } from './components/SearchBar'
 import { StoreProvider } from './Store'
 
 interface Pokemon {
@@ -19,12 +20,16 @@ function App () {
   const [page, setPage] = useState<number>(0)
   const [pokemons, setPokemons] = useState<Pokemon[]>([])
   const [searching, setSearching] = useState<boolean>(false)
+  const [notFound, setNotFound] = useState<boolean>(false)
 
   useEffect(() => {
-    if (searching) {
-      return
+    if (!searching) {
+      fetchData()
     }
-    async function fetchData () {
+  }, [page])
+
+  const fetchData = async () => {
+    try {
       const data = await getPokes(8, 8 * page)
       const promises = data.results.map(async (pokemon:Pokemon) => {
         return await getPokesData(pokemon.url)
@@ -33,9 +38,26 @@ function App () {
       setPokemons(results)
       setTotal(Math.ceil(data.count / 25))
       setSearching(false)
+    } catch (err) {}
+  }
+
+  const onSearch = async (inputPokemon:string) => {
+    if (!inputPokemon) {
+      return fetchData()
     }
-    fetchData()
-  }, [page])
+    setNotFound(false)
+    setSearching(true)
+    const result = await searchPokemon(inputPokemon)
+    if (!result) {
+      setNotFound(true)
+      return
+    } else {
+      setPokemons([result])
+      setPage(0)
+      setTotal(1)
+    }
+    setSearching(false)
+  }
 
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
@@ -44,21 +66,24 @@ function App () {
     <div className='container app'>
       <Header />
       <StoreProvider>
+        <SearchBar onSearch={onSearch} />
         <Navbar handleShow={handleShow} />
         <MyPokes show={show} handleClose={handleClose} />
         <main>
-          {
-            pokemons.length
-              ? (
-              <ListItems
-                page={page}
-                setPage={setPage}
-                pokemons={pokemons}
-                total={total}
-              />
-                )
-              : null
-          }
+          {notFound
+            ? (
+              <div className="app__notfound">
+                Pokemon not found
+              </div>
+              )
+            : (
+                <ListItems
+                  page={page}
+                  setPage={setPage}
+                  pokemons={pokemons}
+                  total={total}
+                />
+              )}
         </main>
       </StoreProvider>
     </div>
