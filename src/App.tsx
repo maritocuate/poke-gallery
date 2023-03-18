@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './App.scss'
 
+import { Pokemon } from './interfaces'
 import { getPokes, getPokesData, searchPokemon } from './api/fetch'
 import { Header } from './components/Header'
 import { ListItems } from './components/ListItems'
@@ -8,11 +9,6 @@ import { MyPokes } from './components/MyPokes'
 import { Navbar } from './components/Navbar'
 import { SearchBar } from './components/SearchBar'
 import { StoreProvider } from './Store'
-
-interface Pokemon {
-  name: string
-  url: string
-}
 
 function App () {
   const [show, setShow] = useState<boolean>(false)

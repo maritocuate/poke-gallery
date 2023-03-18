@@ -1,21 +1,17 @@
 import React from 'react'
 import './styles.scss'
 
+import { Pokemon } from '../../interfaces'
 import Pagination from '../Pagination'
 import { Item } from './Item'
-
-interface Pokemon {
-  name: string;
-  url: string;
-}
-interface Props {
-  pokemons: Pokemon[];
-  total: number;
+interface ListItemsProps {
+  pokemons: Pokemon[]
+  total: number
   page: number
   setPage: (value:number) => void
 }
 
-export const ListItems = ({ pokemons, total, page, setPage }: Props) => {
+export const ListItems = ({ pokemons, total, page, setPage }: ListItemsProps) => {
   const lastPage = () => {
     const nextPage = Math.max(page - 1, 0)
     setPage(nextPage)
