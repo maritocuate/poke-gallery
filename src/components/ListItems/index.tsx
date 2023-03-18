@@ -24,11 +24,13 @@ export const ListItems = ({ pokemons, total, page, setPage }: ListItemsProps) =>
 
   return (
     <>
-      <ul className='items items__list'>
-        {pokemons.map((pokemon, i) => {
-          return <Item key={i} data={pokemon} />
-        })}
-      </ul>
+      <div className='items items__list container'>
+        <div className='row'>
+          {pokemons.map((pokemon, i) => {
+            return <div key={i} className="col-sm"><Item data={pokemon} /></div>
+          })}
+        </div>
+      </div>
 
       <nav className='items__nav'>
         <Pagination
