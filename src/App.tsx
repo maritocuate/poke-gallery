@@ -11,6 +11,7 @@ import { SearchBar } from './components/SearchBar'
 import { StoreProvider } from './Store'
 
 function App () {
+  const [loading, setLoading] = useState<boolean>(true)
   const [show, setShow] = useState<boolean>(false)
   const [total, setTotal] = useState<number>(0)
   const [page, setPage] = useState<number>(0)
@@ -25,12 +26,15 @@ function App () {
   }, [page])
 
   const fetchData = async () => {
+    setLoading(true)
     try {
       const data = await getPokes(8, 8 * page)
       const promises = data.results.map(async (pokemon:Pokemon) => {
         return await getPokesData(pokemon.url)
       })
       const results = await Promise.all(promises)
+      if (promises.length === results.length) setLoading(false)
+
       setPokemons(results)
       setTotal(Math.ceil(data.count / 25))
       setSearching(false)
@@ -73,12 +77,13 @@ function App () {
               </div>
               )
             : (
-                <ListItems
-                  page={page}
-                  setPage={setPage}
-                  pokemons={pokemons}
-                  total={total}
-                />
+              <ListItems
+                page={page}
+                setPage={setPage}
+                pokemons={pokemons}
+                total={total}
+                loading={loading}
+              />
               )}
         </main>
       </StoreProvider>

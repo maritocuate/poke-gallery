@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles.scss'
+import { FaSpinner } from 'react-icons/fa'
 
 import { Pokemon } from '../../interfaces'
 import Pagination from '../Pagination'
@@ -9,9 +10,10 @@ interface ListItemsProps {
   total: number
   page: number
   setPage: (value:number) => void
+  loading: boolean
 }
 
-export const ListItems = ({ pokemons, total, page, setPage }: ListItemsProps) => {
+export const ListItems = ({ pokemons, total, page, setPage, loading }: ListItemsProps) => {
   const lastPage = () => {
     const nextPage = Math.max(page - 1, 0)
     setPage(nextPage)
@@ -25,11 +27,28 @@ export const ListItems = ({ pokemons, total, page, setPage }: ListItemsProps) =>
   return (
     <>
       <div className='items items__list container'>
-        <div className='row'>
-          {pokemons.map((pokemon, i) => {
-            return <div key={i} className="col-sm"><Item data={pokemon} /></div>
-          })}
-        </div>
+
+          {
+            loading
+              ? (
+              <div className='items__loading_container'>
+                <div className='items__loading'><FaSpinner /></div>
+              </div>
+                )
+              : (
+                <div className='row'>
+                  {
+                  pokemons.map((pokemon, i) => {
+                    return (
+                      <div key={i} className="col-sm">
+                        <Item data={pokemon} />
+                      </div>
+                    )
+                  })
+                }
+                </div>
+                )
+          }
       </div>
 
       <nav className='items__nav'>

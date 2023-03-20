@@ -2,7 +2,33 @@
 
 .items {
     color: white;
+    min-height: 660px;
 
+    @keyframes spinner {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+    }
+
+    &__loading_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__loading {
+        height: 30px;
+        animation: spinner 1s linear infinite;
+        svg {
+            height: 30px;
+            width: 30px;
+        }
+    }
+    
     &__list {
         display: flex;
         list-style: none;
