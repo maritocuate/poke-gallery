@@ -25,6 +25,7 @@
     }
     &__card {
         transition: all ease .1s;
+        opacity: 0;
     }
     &__hover {
         position: relative;
